@@ -84,7 +84,7 @@ pub mod test1_client {
                     format!("Service was not ready: {}", e.into()),
                 )
             })?;
-            let codec = tonic::codec::ProstCodec::default();
+            let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static("/proto.Test1/test1");
             self.inner.unary(request.into_request(), path, codec).await
         }
@@ -168,7 +168,7 @@ pub mod test2_client {
                     format!("Service was not ready: {}", e.into()),
                 )
             })?;
-            let codec = tonic::codec::ProstCodec::default();
+            let codec = tonic_prost::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static("/proto.Test2/test2");
             self.inner.unary(request.into_request(), path, codec).await
         }
@@ -260,7 +260,7 @@ pub mod test1_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = test1Svc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
+                        let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,
                             send_compression_encodings,
@@ -391,7 +391,7 @@ pub mod test2_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = test2Svc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
+                        let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec).apply_compression_config(
                             accept_compression_encodings,
                             send_compression_encodings,
